@@ -1,0 +1,10 @@
+C:\Users\Quentin\source\repos\[PROJET]IHS\[PROJET]IHS_test\bin\Debug\[PROJET]IHS_test.exe.config
+C:\Users\Quentin\source\repos\[PROJET]IHS\[PROJET]IHS_test\bin\Debug\[PROJET]IHS_test.exe
+C:\Users\Quentin\source\repos\[PROJET]IHS\[PROJET]IHS_test\bin\Debug\[PROJET]IHS_test.pdb
+C:\Users\Quentin\source\repos\[PROJET]IHS\[PROJET]IHS_test\obj\Debug\[PROJET]IHS.csprojAssemblyReference.cache
+C:\Users\Quentin\source\repos\[PROJET]IHS\[PROJET]IHS_test\obj\Debug\_PROJET_IHS_test.Form1.resources
+C:\Users\Quentin\source\repos\[PROJET]IHS\[PROJET]IHS_test\obj\Debug\_PROJET_IHS_test.Properties.Resources.resources
+C:\Users\Quentin\source\repos\[PROJET]IHS\[PROJET]IHS_test\obj\Debug\[PROJET]IHS.csproj.GenerateResource.cache
+C:\Users\Quentin\source\repos\[PROJET]IHS\[PROJET]IHS_test\obj\Debug\[PROJET]IHS.csproj.CoreCompileInputs.cache
+C:\Users\Quentin\source\repos\[PROJET]IHS\[PROJET]IHS_test\obj\Debug\[PROJET]IHS_test.exe
+C:\Users\Quentin\source\repos\[PROJET]IHS\[PROJET]IHS_test\obj\Debug\[PROJET]IHS_test.pdb
