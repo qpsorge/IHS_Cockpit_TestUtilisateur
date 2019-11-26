@@ -48,9 +48,11 @@
             // 
             this.groupBox1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.groupBox1.Controls.Add(this.labelAlarme);
-            this.groupBox1.Location = new System.Drawing.Point(1029, 1);
+            this.groupBox1.Location = new System.Drawing.Point(686, 1);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(272, 159);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Size = new System.Drawing.Size(181, 103);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "groupBoxAlarme";
@@ -60,65 +62,75 @@
             this.labelAlarme.AutoSize = true;
             this.labelAlarme.Font = new System.Drawing.Font("Arial", 20F, System.Drawing.FontStyle.Bold);
             this.labelAlarme.ForeColor = System.Drawing.Color.Red;
-            this.labelAlarme.Location = new System.Drawing.Point(50, 63);
+            this.labelAlarme.Location = new System.Drawing.Point(33, 41);
+            this.labelAlarme.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelAlarme.Name = "labelAlarme";
-            this.labelAlarme.Size = new System.Drawing.Size(187, 46);
+            this.labelAlarme.Size = new System.Drawing.Size(129, 32);
             this.labelAlarme.TabIndex = 0;
             this.labelAlarme.Text = "ALARME";
             // 
             // labelNombre1
             // 
             this.labelNombre1.AutoSize = true;
+            this.labelNombre1.BackColor = System.Drawing.Color.Transparent;
             this.labelNombre1.Font = new System.Drawing.Font("Arial", 65F, System.Drawing.FontStyle.Bold);
-            this.labelNombre1.ForeColor = System.Drawing.Color.LightSeaGreen;
-            this.labelNombre1.Location = new System.Drawing.Point(92, 139);
+            this.labelNombre1.ForeColor = System.Drawing.Color.Yellow;
+            this.labelNombre1.Location = new System.Drawing.Point(61, 90);
+            this.labelNombre1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelNombre1.Name = "labelNombre1";
-            this.labelNombre1.Size = new System.Drawing.Size(207, 150);
+            this.labelNombre1.Size = new System.Drawing.Size(138, 100);
             this.labelNombre1.TabIndex = 1;
             this.labelNombre1.Text = "10";
             // 
             // labelNombre2
             // 
             this.labelNombre2.AutoSize = true;
+            this.labelNombre2.BackColor = System.Drawing.Color.Transparent;
             this.labelNombre2.Font = new System.Drawing.Font("Arial", 65F, System.Drawing.FontStyle.Bold);
-            this.labelNombre2.ForeColor = System.Drawing.Color.Blue;
-            this.labelNombre2.Location = new System.Drawing.Point(1049, 261);
+            this.labelNombre2.ForeColor = System.Drawing.Color.Yellow;
+            this.labelNombre2.Location = new System.Drawing.Point(699, 170);
+            this.labelNombre2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelNombre2.Name = "labelNombre2";
-            this.labelNombre2.Size = new System.Drawing.Size(135, 150);
+            this.labelNombre2.Size = new System.Drawing.Size(90, 100);
             this.labelNombre2.TabIndex = 2;
             this.labelNombre2.Text = "5";
             // 
             // labelReponse
             // 
             this.labelReponse.AutoSize = true;
-            this.labelReponse.BackColor = System.Drawing.Color.Turquoise;
+            this.labelReponse.BackColor = System.Drawing.Color.Transparent;
             this.labelReponse.Font = new System.Drawing.Font("Arial", 65F, System.Drawing.FontStyle.Bold);
-            this.labelReponse.ForeColor = System.Drawing.Color.DarkGoldenrod;
-            this.labelReponse.Location = new System.Drawing.Point(547, 599);
+            this.labelReponse.ForeColor = System.Drawing.Color.Yellow;
+            this.labelReponse.Location = new System.Drawing.Point(365, 389);
+            this.labelReponse.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelReponse.Name = "labelReponse";
-            this.labelReponse.Size = new System.Drawing.Size(207, 150);
+            this.labelReponse.Size = new System.Drawing.Size(138, 100);
             this.labelReponse.TabIndex = 3;
             this.labelReponse.Text = "15";
             // 
             // labelOperateur
             // 
             this.labelOperateur.AutoSize = true;
+            this.labelOperateur.BackColor = System.Drawing.Color.Transparent;
             this.labelOperateur.Font = new System.Drawing.Font("Arial", 65F, System.Drawing.FontStyle.Bold);
-            this.labelOperateur.ForeColor = System.Drawing.Color.ForestGreen;
-            this.labelOperateur.Location = new System.Drawing.Point(547, 230);
+            this.labelOperateur.ForeColor = System.Drawing.Color.Yellow;
+            this.labelOperateur.Location = new System.Drawing.Point(365, 149);
+            this.labelOperateur.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelOperateur.Name = "labelOperateur";
-            this.labelOperateur.Size = new System.Drawing.Size(139, 150);
+            this.labelOperateur.Size = new System.Drawing.Size(93, 100);
             this.labelOperateur.TabIndex = 4;
             this.labelOperateur.Text = "+";
             // 
             // labelEgal
             // 
             this.labelEgal.AutoSize = true;
+            this.labelEgal.BackColor = System.Drawing.Color.Transparent;
             this.labelEgal.Font = new System.Drawing.Font("Arial", 65F, System.Drawing.FontStyle.Bold);
-            this.labelEgal.ForeColor = System.Drawing.Color.Magenta;
-            this.labelEgal.Location = new System.Drawing.Point(160, 599);
+            this.labelEgal.ForeColor = System.Drawing.Color.Yellow;
+            this.labelEgal.Location = new System.Drawing.Point(107, 389);
+            this.labelEgal.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelEgal.Name = "labelEgal";
-            this.labelEgal.Size = new System.Drawing.Size(139, 150);
+            this.labelEgal.Size = new System.Drawing.Size(93, 100);
             this.labelEgal.TabIndex = 5;
             this.labelEgal.Text = "=";
             this.labelEgal.Click += new System.EventHandler(this.Label5_Click);
@@ -126,9 +138,10 @@
             // labelAvancement
             // 
             this.labelAvancement.AutoSize = true;
-            this.labelAvancement.Location = new System.Drawing.Point(12, 1);
+            this.labelAvancement.Location = new System.Drawing.Point(8, 1);
+            this.labelAvancement.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelAvancement.Name = "labelAvancement";
-            this.labelAvancement.Size = new System.Drawing.Size(98, 20);
+            this.labelAvancement.Size = new System.Drawing.Size(67, 13);
             this.labelAvancement.TabIndex = 6;
             this.labelAvancement.Text = "Avancement";
             // 
@@ -142,17 +155,18 @@
             // 
             this.fondEcranImage.Image = ((System.Drawing.Image)(resources.GetObject("fondEcranImage.Image")));
             this.fondEcranImage.Location = new System.Drawing.Point(1, 1);
+            this.fondEcranImage.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.fondEcranImage.Name = "fondEcranImage";
-            this.fondEcranImage.Size = new System.Drawing.Size(1331, 875);
+            this.fondEcranImage.Size = new System.Drawing.Size(887, 569);
             this.fondEcranImage.TabIndex = 7;
             this.fondEcranImage.TabStop = false;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.ClientSize = new System.Drawing.Size(1390, 945);
+            this.ClientSize = new System.Drawing.Size(927, 614);
             this.Controls.Add(this.labelAvancement);
             this.Controls.Add(this.labelEgal);
             this.Controls.Add(this.labelOperateur);
@@ -161,6 +175,7 @@
             this.Controls.Add(this.labelNombre1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.fondEcranImage);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "Form1";
             this.ShowIcon = false;
             this.Text = "IHS Test Utilisateur";

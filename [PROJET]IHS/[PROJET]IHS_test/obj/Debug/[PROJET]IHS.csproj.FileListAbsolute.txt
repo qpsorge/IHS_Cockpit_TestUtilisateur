@@ -18,3 +18,12 @@ C:\Users\Quentin\IHS_Cockpit_TestUtilisateur\[PROJET]IHS\[PROJET]IHS_test\obj\De
 C:\Users\Quentin\IHS_Cockpit_TestUtilisateur\[PROJET]IHS\[PROJET]IHS_test\obj\Debug\[PROJET]IHS.csproj.CoreCompileInputs.cache
 C:\Users\Quentin\IHS_Cockpit_TestUtilisateur\[PROJET]IHS\[PROJET]IHS_test\obj\Debug\[PROJET]IHS_test.exe
 C:\Users\Quentin\IHS_Cockpit_TestUtilisateur\[PROJET]IHS\[PROJET]IHS_test\obj\Debug\[PROJET]IHS_test.pdb
+H:\2A\IHM\Cockpit\IHS_Cockpit_TestUtilisateur\[PROJET]IHS\[PROJET]IHS_test\bin\Debug\[PROJET]IHS_test.exe.config
+H:\2A\IHM\Cockpit\IHS_Cockpit_TestUtilisateur\[PROJET]IHS\[PROJET]IHS_test\bin\Debug\[PROJET]IHS_test.exe
+H:\2A\IHM\Cockpit\IHS_Cockpit_TestUtilisateur\[PROJET]IHS\[PROJET]IHS_test\bin\Debug\[PROJET]IHS_test.pdb
+H:\2A\IHM\Cockpit\IHS_Cockpit_TestUtilisateur\[PROJET]IHS\[PROJET]IHS_test\obj\Debug\[PROJET]IHS.csprojResolveAssemblyReference.cache
+H:\2A\IHM\Cockpit\IHS_Cockpit_TestUtilisateur\[PROJET]IHS\[PROJET]IHS_test\obj\Debug\_PROJET_IHS_test.Form1.resources
+H:\2A\IHM\Cockpit\IHS_Cockpit_TestUtilisateur\[PROJET]IHS\[PROJET]IHS_test\obj\Debug\_PROJET_IHS_test.Properties.Resources.resources
+H:\2A\IHM\Cockpit\IHS_Cockpit_TestUtilisateur\[PROJET]IHS\[PROJET]IHS_test\obj\Debug\[PROJET]IHS.csproj.GenerateResource.Cache
+H:\2A\IHM\Cockpit\IHS_Cockpit_TestUtilisateur\[PROJET]IHS\[PROJET]IHS_test\obj\Debug\[PROJET]IHS_test.exe
+H:\2A\IHM\Cockpit\IHS_Cockpit_TestUtilisateur\[PROJET]IHS\[PROJET]IHS_test\obj\Debug\[PROJET]IHS_test.pdb
