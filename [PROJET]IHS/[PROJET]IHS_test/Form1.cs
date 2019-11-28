@@ -21,30 +21,59 @@ namespace _PROJET_IHS_test
         List<Tuple<int, double>> taillesTemps = new List<Tuple<int, double>>(); // taille de police, temps de réaction
         private static System.Timers.Timer chrono;
 
-        public void UpdateText(string value)
+        public delegate void Del(string nombre1, string nombre2, string operation, string resultats);
+
+        public Delegate UpdateTextDelegate(string nombre1, string nombre2, string operation, string resultats)
         {
-            if (this.labelEgal.InvokeRequired)
+            UpdateText(nombre1, nombre2, operation, resultats);
+            return new Del(UpdateText);
+        }
+
+        public void UpdateText(string nombre1, string nombre2, string operation, string resultat)
+        {
+            if (labelNombre1.InvokeRequired)
             {
                 // This is a worker thread so delegate the task.
-                this.labelEgal.Invoke(new Del(this.UpdateText), value);
+                labelNombre1.Invoke(new Del(UpdateText), nombre1, nombre2, operation, resultat);
             }
             else
             {
                 // This is the UI thread so perform the task.
-                this.labelEgal.Text = value.ToString();
+                labelNombre1.Text = nombre1;
+                labelNombre2.Text = nombre2;
+                labelOperateur.Text = operation;
+                labelReponse.Text = resultat;
             }
         }
 
-        private void OnTimedEvent(Object source, System.Timers.ElapsedEventArgs e)
+        private void OnTimedEvent(object source, ElapsedEventArgs e)
         {
-            UpdateTextDelegate("" + e.SignalTime);
-        }
-        public delegate void Del(string message);
+            
+            int choixOperateur = rand.Next(0, 3 + 1);
+            string operation = "" + operateurs[choixOperateur];
+            string nombre1 = "" + rand.Next(1, 21);
+            string nombre2 = "" + rand.Next(1, 21);
+            string resultat = "";
+            switch (choixOperateur)
+            {
+                case 0:
+                    resultat = "" + (int.Parse(labelNombre1.Text) + int.Parse(labelNombre2.Text) + rand.Next(0, 4) - 2);
+                    break;
 
-        public Delegate UpdateTextDelegate(string v)
-        {
-            UpdateText(v);
-            return new Del(UpdateText);
+                case 1:
+                    resultat = "" + (int.Parse(labelNombre1.Text) - int.Parse(labelNombre2.Text) + rand.Next(0, 4) - 2);
+                    break;
+
+                case 2:
+                    resultat = "" + (int.Parse(labelNombre1.Text) / int.Parse(labelNombre2.Text) + rand.Next(0, 4) - 2);
+                    break;
+
+                case 3:
+                    resultat = "" + (int.Parse(labelNombre1.Text) * int.Parse(labelNombre2.Text) + rand.Next(0, 4) - 2);
+                    break;
+            }
+            
+            UpdateTextDelegate(nombre1, nombre2, operation, resultat);
         }
 
         public Form1()
@@ -88,50 +117,10 @@ namespace _PROJET_IHS_test
             chrono.AutoReset = true;
             // Start the timer
             chrono.Enabled = true;
-
-            afficherAlarme(taillesTemps[i].Item1);
+            
             /*while (!fini && i<taillesTemps.Count())
             {
-                afficherAlarme(taillesTemps[i].Item1);
-                ++i;
-                watch.Start();
-                int choixOperateur = rand.Next(0, 3 + 1);
-                labelOperateur.Text = "" + operateurs[choixOperateur];
-                labelOperateur.Refresh();
-
-                labelNombre1.Text = "" + rand.Next(1, 21);
-                labelNombre1.Refresh();
-
-                labelNombre2.Text = "" + rand.Next(1, 21);
-                labelNombre2.Refresh();
-                switch (choixOperateur)
-                {
-                    case 0:
-                        labelReponse.Text = "" + (int.Parse(labelNombre1.Text) + int.Parse(labelNombre2.Text) + rand.Next(0, 4) - 2);
-                        break;
-
-                    case 1:
-                        labelReponse.Text = "" + (int.Parse(labelNombre1.Text) - int.Parse(labelNombre2.Text) + rand.Next(0, 4) - 2);
-                        break;
-
-                    case 2:
-                        labelReponse.Text = "" + (int.Parse(labelNombre1.Text) / int.Parse(labelNombre2.Text) + rand.Next(0, 4) - 2);
-                        break;
-
-                    case 3:
-                        labelReponse.Text = "" + (int.Parse(labelNombre1.Text) * int.Parse(labelNombre2.Text) + rand.Next(0, 4) - 2);
-                        break;
-                }
-                labelReponse.Refresh();
-
-                labelAvancement.Refresh();
-                do
-                {
-                    //nothing
-                } while (watch.ElapsedMilliseconds <= 2000);
-
-                watch.Stop();
-                watch.Reset();
+                
 
             }*/
         }
