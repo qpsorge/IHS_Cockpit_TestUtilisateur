@@ -21,12 +21,12 @@ namespace _PROJET_IHS_test
         List<Tuple<int, double>> taillesTemps = new List<Tuple<int, double>>(); // taille de police, temps de réaction
         private static System.Timers.Timer chrono;
 
-        private void UpdateText(string value)
+        public void UpdateText(string value)
         {
             if (this.labelEgal.InvokeRequired)
             {
                 // This is a worker thread so delegate the task.
-                //this.labelEgal.Invoke(new UpdateTextDelegate(this.UpdateText), value);
+                this.labelEgal.Invoke(new Del(this.UpdateText), value);
             }
             else
             {
@@ -35,15 +35,16 @@ namespace _PROJET_IHS_test
             }
         }
 
-        private void OnTimedEvent(object source, ElapsedEventArgs e)
+        private void OnTimedEvent(Object source, System.Timers.ElapsedEventArgs e)
         {
-            Invoke(UpdateTextDelegate("" + e.SignalTime));
+            UpdateTextDelegate("" + e.SignalTime);
         }
+        public delegate void Del(string message);
 
         public Delegate UpdateTextDelegate(string v)
         {
             UpdateText(v);
-            return null;
+            return new Del(UpdateText);
         }
 
         public Form1()
@@ -88,6 +89,7 @@ namespace _PROJET_IHS_test
             // Start the timer
             chrono.Enabled = true;
 
+            afficherAlarme(taillesTemps[i].Item1);
             /*while (!fini && i<taillesTemps.Count())
             {
                 afficherAlarme(taillesTemps[i].Item1);
