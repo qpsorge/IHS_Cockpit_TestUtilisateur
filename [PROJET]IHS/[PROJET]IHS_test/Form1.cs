@@ -17,17 +17,29 @@ namespace _PROJET_IHS_test
         Stopwatch watch = new Stopwatch();
         Random rand = new Random();
         string[] operateurs = { "+", "-", "/" ,"x"};
+        List<Tuple<int, double>> taillesTemps = new List<Tuple<int, double>>(); // taille de police, temps de réaction
         
         public Form1()
         {
             InitializeComponent();
         }
+        public void afficherAlarme(int size)
+        {
+            labelAlarme.Font = new Font("Arial",size,FontStyle.Bold);
+            labelAlarme.ForeColor = Color.Red;
+            labelAlarme.Refresh();
+        }
 
         private void Label5_Click(object sender, EventArgs e)
         {
+            bool fini = false;
+            bool detecte = false;
+            int i = 0;
 
-            for (int i = 0; i < 5; ++i)
+            while (!fini)
             {
+                afficherAlarme(taillesTemps[i].Item1);
+                ++ i;
                 watch.Start();
                 int choixOperateur = rand.Next(0, 3 + 1);
                 labelOperateur.Text = "" + operateurs[choixOperateur];
@@ -57,8 +69,7 @@ namespace _PROJET_IHS_test
                         break;
                 }
                 labelReponse.Refresh();
-
-                labelAvancement.Text = ""+i+"/4";
+                
                 labelAvancement.Refresh();
                 do
                 {
@@ -69,6 +80,26 @@ namespace _PROJET_IHS_test
                 watch.Reset();
                 
             }
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            taillesTemps.Add(new Tuple<int, double> (20, 0.0));
+            taillesTemps.Add(new Tuple<int, double> (15, 0.0));
+            taillesTemps.Add(new Tuple<int, double> (10, 0.0));
+            taillesTemps.Add(new Tuple<int, double> (18, 0.0));
+            taillesTemps.Add(new Tuple<int, double> (12, 0.0));
+            taillesTemps.Add(new Tuple<int, double> (14, 0.0));
+            taillesTemps.Add(new Tuple<int, double> (11, 0.0));
+            taillesTemps.Add(new Tuple<int, double> (6, 0.0));
+            taillesTemps.Add(new Tuple<int, double> (13, 0.0));
+            taillesTemps.Add(new Tuple<int, double> (19, 0.0));
+        }
+
+        private void Form1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            labelAlarme.ForeColor = Color.Black;
+            labelAlarme.Refresh();
         }
     }
 }
