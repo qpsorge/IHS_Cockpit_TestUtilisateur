@@ -37,6 +37,7 @@
             this.labelAvancement = new System.Windows.Forms.Label();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.labelAlarme = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // labelNombre1
@@ -103,7 +104,6 @@
             this.labelEgal.Size = new System.Drawing.Size(93, 100);
             this.labelEgal.TabIndex = 5;
             this.labelEgal.Text = "=";
-            this.labelEgal.Click += new System.EventHandler(this.Label5_Click);
             // 
             // labelAvancement
             // 
@@ -134,6 +134,18 @@
             this.labelAlarme.TabIndex = 0;
             this.labelAlarme.Text = "ALARME";
             // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.Yellow;
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(337, 31);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(233, 115);
+            this.button1.TabIndex = 7;
+            this.button1.Text = "Démarrer l\'expérience";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -142,6 +154,7 @@
             this.BackgroundImage = global::_PROJET_IHS_test.Properties.Resources._65082700_computer_in_de_kuip_vliegtuig_glass_cockpit_display_met_weerradar_en_de_motor_meters_in_kleine_privé_v;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(927, 614);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.labelAlarme);
             this.Controls.Add(this.labelAvancement);
             this.Controls.Add(this.labelEgal);
@@ -149,12 +162,13 @@
             this.Controls.Add(this.labelReponse);
             this.Controls.Add(this.labelNombre2);
             this.Controls.Add(this.labelNombre1);
+            this.KeyPreview = true;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
             this.ShowIcon = false;
             this.Text = "IHS Test Utilisateur";
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Form1_KeyPress);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -169,6 +183,7 @@
         private System.Windows.Forms.Label labelAvancement;
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.Label labelAlarme;
+        private System.Windows.Forms.Button button1;
     }
 }
 
