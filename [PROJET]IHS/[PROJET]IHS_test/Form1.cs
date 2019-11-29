@@ -20,13 +20,38 @@ namespace _PROJET_IHS_test
         string[] operateurs = { "+", "-", "/" ,"x"};
         List<Tuple<int, double>> taillesTemps = new List<Tuple<int, double>>(); // taille de police, temps de réaction
         private static System.Timers.Timer chrono;
+        //private static System.Timers.Timer timerAlarme;
+        int alarmeAffichee = -1;
+        TimeSpan debutAlarme;
+        int iChrono = 0;
 
         public delegate void Del(string nombre1, string nombre2, string operation, string resultats);
+        public delegate void Del2(int size);
+
+        public Delegate UpdateAlarmeDelegate(int size)
+        {
+            UpdateAlarme(size);
+            return new Del2(UpdateAlarme);
+        }
 
         public Delegate UpdateTextDelegate(string nombre1, string nombre2, string operation, string resultats)
         {
             UpdateText(nombre1, nombre2, operation, resultats);
             return new Del(UpdateText);
+        }
+
+        public void UpdateAlarme(int size)
+        {
+            if (labelAlarme.InvokeRequired)
+            {
+                labelAlarme.Invoke(new Del2(UpdateAlarme), size);
+            }
+            else
+            {
+                labelAlarme.Font = new Font("Arial", size, FontStyle.Bold);
+                labelAlarme.ForeColor = Color.Red;
+                debutAlarme = watch.Elapsed;
+            }
         }
 
         public void UpdateText(string nombre1, string nombre2, string operation, string resultat)
@@ -46,45 +71,69 @@ namespace _PROJET_IHS_test
             }
         }
 
-        private void OnTimedEvent(object source, ElapsedEventArgs e)
+        private void OnChronoTimedEvent(object source, ElapsedEventArgs e)
         {
-            
-            int choixOperateur = rand.Next(0, 3 + 1);
-            string operation = "" + operateurs[choixOperateur];
-            string nombre1 = "" + rand.Next(1, 21);
-            string nombre2 = "" + rand.Next(1, 21);
-            string resultat = "";
-            switch (choixOperateur)
+            if (iChrono % 10 == 0) // modification opérations
             {
-                case 0:
-                    resultat = "" + (int.Parse(labelNombre1.Text) + int.Parse(labelNombre2.Text) + rand.Next(0, 4) - 2);
-                    break;
-
-                case 1:
-                    resultat = "" + (int.Parse(labelNombre1.Text) - int.Parse(labelNombre2.Text) + rand.Next(0, 4) - 2);
-                    break;
-
-                case 2:
-                    resultat = "" + (int.Parse(labelNombre1.Text) / int.Parse(labelNombre2.Text) + rand.Next(0, 4) - 2);
-                    break;
-
-                case 3:
-                    resultat = "" + (int.Parse(labelNombre1.Text) * int.Parse(labelNombre2.Text) + rand.Next(0, 4) - 2);
-                    break;
+                int choixOperateur = rand.Next(0, 3 + 1);
+                string operation = "" + operateurs[choixOperateur];
+                string nombre1 = "" + rand.Next(1, 21);
+                string nombre2 = "" + rand.Next(1, 21);
+                string resultat = "";
+                switch (choixOperateur)
+                {
+                    case 0:
+                        resultat = "" + (int.Parse(labelNombre1.Text) + int.Parse(labelNombre2.Text) + rand.Next(0, 4) - 2);
+                        break;
+                    case 1:
+                        resultat = "" + (int.Parse(labelNombre1.Text) - int.Parse(labelNombre2.Text) + rand.Next(0, 4) - 2);
+                        break;
+                    case 2:
+                        resultat = "" + (int.Parse(labelNombre1.Text) / int.Parse(labelNombre2.Text) + rand.Next(0, 4) - 2);
+                        break;
+                    case 3:
+                        resultat = "" + (int.Parse(labelNombre1.Text) * int.Parse(labelNombre2.Text) + rand.Next(0, 4) - 2);
+                        break;
+                }
+                UpdateTextDelegate(nombre1, nombre2, operation, resultat);
             }
-            
-            UpdateTextDelegate(nombre1, nombre2, operation, resultat);
+            else
+            {
+                int randnumber = rand.Next(0, 10);
+                if (alarmeAffichee == -1 && randnumber >= 5)
+                {
+                    ChoisirAlarmeAAfficherRandom();
+                    UpdateAlarmeDelegate(taillesTemps[alarmeAffichee].Item1);
+                }
+            }
+
+            ++iChrono;
         }
+
+        /*private void OnTimerAlarmeTimedEvent(object source, ElapsedEventArgs e)
+        {
+            int randnumber = rand.Next(0, 10);
+            if (alarmeAffichee == -1 && randnumber >= 5)
+            {
+                ChoisirAlarmeAAfficherRandom();
+                UpdateAlarmeDelegate(taillesTemps[alarmeAffichee].Item1);
+            }
+        }*/
 
         public Form1()
         {
             InitializeComponent();
         }
-        public void afficherAlarme(int size)
+
+        private void ChoisirAlarmeAAfficherRandom()
         {
-            labelAlarme.Font = new Font("Arial",size,FontStyle.Bold);
-            labelAlarme.ForeColor = Color.Red;
-            labelAlarme.Refresh();
+            bool trouve = false;
+            while (!trouve) // TODO vérifier qu'il reste des nouvelles alarmes à afficher
+            {
+                alarmeAffichee = rand.Next(0, taillesTemps.Count);
+                if (taillesTemps[alarmeAffichee].Item2 != 0.0)
+                    trouve = true;
+            }
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -104,29 +153,33 @@ namespace _PROJET_IHS_test
         private void button1_Click(object sender, EventArgs e)
         {
             button1.Hide();
-            bool fini = false;
-            bool detecte = false;
-            int i = 0;
 
             // Create a timer and set a two second interval.
             chrono = new System.Timers.Timer();
-            chrono.Interval = 2000;
+            chrono.Interval = 200;
             // Hook up the Elapsed event for the timer. 
-            chrono.Elapsed += OnTimedEvent;
+            chrono.Elapsed += OnChronoTimedEvent;
             // Have the timer fire repeated events (true is the default)
             chrono.AutoReset = true;
             // Start the timer
             chrono.Enabled = true;
-            
-            /*while (!fini && i<taillesTemps.Count())
-            {
-                
 
-            }*/
+            /*timerAlarme = new System.Timers.Timer();
+            timerAlarme.Interval = 200;
+            timerAlarme.Elapsed += OnTimerAlarmeTimedEvent;
+            timerAlarme.AutoReset = true;
+            timerAlarme.Enabled = true;*/
+
+            watch.Start();
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
+            TimeSpan debut = debutAlarme;
+            TimeSpan fin = watch.Elapsed;
+            double milliseconds = (fin - debut).TotalMilliseconds;
+            taillesTemps[alarmeAffichee] = new Tuple<int,double> (taillesTemps[alarmeAffichee].Item1,milliseconds);
+            alarmeAffichee = -1;
             labelAlarme.ForeColor = Color.Black;
             labelAlarme.Refresh();
         }
