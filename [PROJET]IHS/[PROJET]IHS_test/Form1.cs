@@ -50,6 +50,7 @@ namespace _PROJET_IHS_test
             {
                 labelAlarme.Font = new Font("Arial", size, FontStyle.Bold);
                 labelAlarme.ForeColor = Color.Red;
+                labelAlarme.Refresh();
                 debutAlarme = watch.Elapsed;
             }
         }
@@ -97,15 +98,15 @@ namespace _PROJET_IHS_test
                 }
                 UpdateTextDelegate(nombre1, nombre2, operation, resultat);
             }
-            else
-            {
+            //else
+            //{
                 int randnumber = rand.Next(0, 10);
                 if (alarmeAffichee == -1 && randnumber >= 5)
                 {
                     ChoisirAlarmeAAfficherRandom();
                     UpdateAlarmeDelegate(taillesTemps[alarmeAffichee].Item1);
                 }
-            }
+            //}
 
             ++iChrono;
         }
@@ -131,7 +132,7 @@ namespace _PROJET_IHS_test
             while (!trouve) // TODO vérifier qu'il reste des nouvelles alarmes à afficher
             {
                 alarmeAffichee = rand.Next(0, taillesTemps.Count);
-                if (taillesTemps[alarmeAffichee].Item2 != 0.0)
+                if (taillesTemps[alarmeAffichee].Item2 == 0.0)
                     trouve = true;
             }
         }
