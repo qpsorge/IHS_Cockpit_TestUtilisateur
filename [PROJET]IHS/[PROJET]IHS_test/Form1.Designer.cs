@@ -38,10 +38,12 @@
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.labelAlarme = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
+            this.boutonTermine = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // labelNombre1
             // 
+            this.labelNombre1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.labelNombre1.AutoSize = true;
             this.labelNombre1.BackColor = System.Drawing.Color.Transparent;
             this.labelNombre1.Font = new System.Drawing.Font("Arial", 65F, System.Drawing.FontStyle.Bold);
@@ -55,6 +57,7 @@
             // 
             // labelNombre2
             // 
+            this.labelNombre2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.labelNombre2.AutoSize = true;
             this.labelNombre2.BackColor = System.Drawing.Color.Transparent;
             this.labelNombre2.Font = new System.Drawing.Font("Arial", 65F, System.Drawing.FontStyle.Bold);
@@ -68,6 +71,7 @@
             // 
             // labelReponse
             // 
+            this.labelReponse.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.labelReponse.AutoSize = true;
             this.labelReponse.BackColor = System.Drawing.Color.Transparent;
             this.labelReponse.Font = new System.Drawing.Font("Arial", 65F, System.Drawing.FontStyle.Bold);
@@ -81,6 +85,7 @@
             // 
             // labelOperateur
             // 
+            this.labelOperateur.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.labelOperateur.AutoSize = true;
             this.labelOperateur.BackColor = System.Drawing.Color.Transparent;
             this.labelOperateur.Font = new System.Drawing.Font("Arial", 65F, System.Drawing.FontStyle.Bold);
@@ -94,6 +99,7 @@
             // 
             // labelEgal
             // 
+            this.labelEgal.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.labelEgal.AutoSize = true;
             this.labelEgal.BackColor = System.Drawing.Color.Transparent;
             this.labelEgal.Font = new System.Drawing.Font("Arial", 65F, System.Drawing.FontStyle.Bold);
@@ -123,6 +129,7 @@
             // 
             // labelAlarme
             // 
+            this.labelAlarme.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labelAlarme.AutoSize = true;
             this.labelAlarme.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.labelAlarme.Font = new System.Drawing.Font("Arial", 20F, System.Drawing.FontStyle.Bold);
@@ -133,18 +140,32 @@
             this.labelAlarme.Size = new System.Drawing.Size(129, 32);
             this.labelAlarme.TabIndex = 0;
             this.labelAlarme.Text = "ALARME";
+            this.labelAlarme.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // button1
             // 
+            this.button1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.button1.BackColor = System.Drawing.Color.Yellow;
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(337, 31);
+            this.button1.Location = new System.Drawing.Point(288, 21);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(233, 115);
             this.button1.TabIndex = 7;
             this.button1.Text = "Démarrer l\'expérience";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // boutonTermine
+            // 
+            this.boutonTermine.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.boutonTermine.BackColor = System.Drawing.Color.Lime;
+            this.boutonTermine.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.boutonTermine.Location = new System.Drawing.Point(321, 290);
+            this.boutonTermine.Name = "boutonTermine";
+            this.boutonTermine.Size = new System.Drawing.Size(200, 86);
+            this.boutonTermine.TabIndex = 8;
+            this.boutonTermine.Text = "Terminé";
+            this.boutonTermine.UseVisualStyleBackColor = false;
             // 
             // Form1
             // 
@@ -154,6 +175,7 @@
             this.BackgroundImage = global::_PROJET_IHS_test.Properties.Resources._65082700_computer_in_de_kuip_vliegtuig_glass_cockpit_display_met_weerradar_en_de_motor_meters_in_kleine_privé_v;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(927, 614);
+            this.Controls.Add(this.boutonTermine);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.labelAlarme);
             this.Controls.Add(this.labelAvancement);
@@ -167,6 +189,7 @@
             this.Name = "Form1";
             this.ShowIcon = false;
             this.Text = "IHS Test Utilisateur";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.ResumeLayout(false);
@@ -184,6 +207,7 @@
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.Label labelAlarme;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button boutonTermine;
     }
 }
 

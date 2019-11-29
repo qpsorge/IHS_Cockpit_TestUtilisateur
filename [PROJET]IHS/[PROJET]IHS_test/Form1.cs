@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using System.Threading;
 using System.Timers;
+using System.IO;
 
 namespace _PROJET_IHS_test
 {
@@ -20,13 +21,14 @@ namespace _PROJET_IHS_test
         string[] operateurs = { "+", "-", "/" ,"x"};
         List<Tuple<int, double>> taillesTemps = new List<Tuple<int, double>>(); // taille de police, temps de réaction
         private static System.Timers.Timer chrono;
-        //private static System.Timers.Timer timerAlarme;
         int alarmeAffichee = -1;
+        double tempsAlarmeAffichee = 0.0;
         TimeSpan debutAlarme;
         int iChrono = 0;
 
         public delegate void Del(string nombre1, string nombre2, string operation, string resultats);
         public delegate void Del2(int size);
+        public delegate void Del3();
 
         public Delegate UpdateAlarmeDelegate(int size)
         {
@@ -38,6 +40,12 @@ namespace _PROJET_IHS_test
         {
             UpdateText(nombre1, nombre2, operation, resultats);
             return new Del(UpdateText);
+        }
+
+        public Delegate SupprimeAlarmeDelegate()
+        {
+            SupprimerAlarme();
+            return new Del3(SupprimerAlarme);
         }
 
         public void UpdateAlarme(int size)
@@ -71,10 +79,35 @@ namespace _PROJET_IHS_test
                 labelReponse.Text = resultat;
             }
         }
+        public void SupprimerAlarme()
+        {
+            if (labelAlarme.InvokeRequired)
+            {
+                labelAlarme.Invoke(new Del3(SupprimerAlarme));
+            }
+            else
+            {
+                alarmeAffichee = -1;
+                tempsAlarmeAffichee = 0.0;
+                labelAlarme.ForeColor = Color.Black;
+                labelAlarme.Refresh();
+            }
+        }
 
         private void OnChronoTimedEvent(object source, ElapsedEventArgs e)
         {
-            if (iChrono % 10 == 0) // modification opérations
+            ++iChrono;
+
+            if (alarmeAffichee != -1)
+            {
+                tempsAlarmeAffichee += 0.4;
+                if (tempsAlarmeAffichee >= 5)
+                {
+                    taillesTemps[alarmeAffichee] = new Tuple<int, double>(taillesTemps[alarmeAffichee].Item1, 5000);
+                    SupprimerAlarme();
+                }
+            }
+            if (iChrono % 5 == 1) // modification opérations
             {
                 int choixOperateur = rand.Next(0, 3 + 1);
                 string operation = "" + operateurs[choixOperateur];
@@ -98,28 +131,36 @@ namespace _PROJET_IHS_test
                 }
                 UpdateTextDelegate(nombre1, nombre2, operation, resultat);
             }
-            //else
-            //{
-                int randnumber = rand.Next(0, 10);
-                if (alarmeAffichee == -1 && randnumber >= 5)
+            else
+            {
+                int randnumber = rand.Next(0, 50);
+                if (alarmeAffichee == -1 && randnumber >= 48)
                 {
                     ChoisirAlarmeAAfficherRandom();
                     UpdateAlarmeDelegate(taillesTemps[alarmeAffichee].Item1);
                 }
-            //}
-
-            ++iChrono;
+            }
         }
 
-        /*private void OnTimerAlarmeTimedEvent(object source, ElapsedEventArgs e)
+        public bool termine()
         {
-            int randnumber = rand.Next(0, 10);
-            if (alarmeAffichee == -1 && randnumber >= 5)
+            bool termine = true;
+            int i = 0;
+            while (termine && i < taillesTemps.Count)
             {
-                ChoisirAlarmeAAfficherRandom();
-                UpdateAlarmeDelegate(taillesTemps[alarmeAffichee].Item1);
+                if (taillesTemps[i].Item2 == 0.0)
+                {
+                    termine = false;
+                }
+                ++i;
             }
-        }*/
+            if (termine)
+            {
+                boutonTermine.Show();
+                chrono.Close();
+            }
+            return termine;
+        }
 
         public Form1()
         {
@@ -129,6 +170,8 @@ namespace _PROJET_IHS_test
         private void ChoisirAlarmeAAfficherRandom()
         {
             bool trouve = false;
+            if (termine())
+                return;
             while (!trouve) // TODO vérifier qu'il reste des nouvelles alarmes à afficher
             {
                 alarmeAffichee = rand.Next(0, taillesTemps.Count);
@@ -139,16 +182,28 @@ namespace _PROJET_IHS_test
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            taillesTemps.Add(new Tuple<int, double> (20, 0.0));
-            taillesTemps.Add(new Tuple<int, double> (15, 0.0));
-            taillesTemps.Add(new Tuple<int, double> (10, 0.0));
-            taillesTemps.Add(new Tuple<int, double> (18, 0.0));
-            taillesTemps.Add(new Tuple<int, double> (12, 0.0));
-            taillesTemps.Add(new Tuple<int, double> (14, 0.0));
-            taillesTemps.Add(new Tuple<int, double> (11, 0.0));
+            boutonTermine.Hide();
+
             taillesTemps.Add(new Tuple<int, double> (6, 0.0));
+            taillesTemps.Add(new Tuple<int, double> (7, 0.0));
+            taillesTemps.Add(new Tuple<int, double> (8, 0.0));
+            taillesTemps.Add(new Tuple<int, double> (9, 0.0));
+            taillesTemps.Add(new Tuple<int, double> (10, 0.0));
+            taillesTemps.Add(new Tuple<int, double> (11, 0.0));
+            taillesTemps.Add(new Tuple<int, double> (12, 0.0));
             taillesTemps.Add(new Tuple<int, double> (13, 0.0));
+            taillesTemps.Add(new Tuple<int, double> (14, 0.0));
+            taillesTemps.Add(new Tuple<int, double> (15, 0.0));
+            taillesTemps.Add(new Tuple<int, double> (16, 0.0));
+            taillesTemps.Add(new Tuple<int, double> (17, 0.0));
+            taillesTemps.Add(new Tuple<int, double> (18, 0.0));
             taillesTemps.Add(new Tuple<int, double> (19, 0.0));
+            taillesTemps.Add(new Tuple<int, double> (20, 0.0));
+            taillesTemps.Add(new Tuple<int, double> (21, 0.0));
+            taillesTemps.Add(new Tuple<int, double> (22, 0.0));
+            taillesTemps.Add(new Tuple<int, double> (23, 0.0));
+            taillesTemps.Add(new Tuple<int, double> (24, 0.0));
+            taillesTemps.Add(new Tuple<int, double> (25, 0.0));
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -157,7 +212,7 @@ namespace _PROJET_IHS_test
 
             // Create a timer and set a two second interval.
             chrono = new System.Timers.Timer();
-            chrono.Interval = 200;
+            chrono.Interval = 400;
             // Hook up the Elapsed event for the timer. 
             chrono.Elapsed += OnChronoTimedEvent;
             // Have the timer fire repeated events (true is the default)
@@ -165,24 +220,46 @@ namespace _PROJET_IHS_test
             // Start the timer
             chrono.Enabled = true;
 
-            /*timerAlarme = new System.Timers.Timer();
-            timerAlarme.Interval = 200;
-            timerAlarme.Elapsed += OnTimerAlarmeTimedEvent;
-            timerAlarme.AutoReset = true;
-            timerAlarme.Enabled = true;*/
-
             watch.Start();
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-            TimeSpan debut = debutAlarme;
-            TimeSpan fin = watch.Elapsed;
-            double milliseconds = (fin - debut).TotalMilliseconds;
-            taillesTemps[alarmeAffichee] = new Tuple<int,double> (taillesTemps[alarmeAffichee].Item1,milliseconds);
+            if (alarmeAffichee != -1)
+            {
+                TimeSpan debut = debutAlarme;
+                TimeSpan fin = watch.Elapsed;
+                double milliseconds = (fin - debut).TotalMilliseconds;
+                taillesTemps[alarmeAffichee] = new Tuple<int, double>(taillesTemps[alarmeAffichee].Item1, milliseconds);
+                effacerAlarme();
+            }
+        }
+
+        private void effacerAlarme()
+        {
             alarmeAffichee = -1;
+            tempsAlarmeAffichee = 0.0;
             labelAlarme.ForeColor = Color.Black;
             labelAlarme.Refresh();
+            termine();
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            //File.Create("./tempsTaille.csv");
+
+            FileStream fs = new FileStream("./tempsTaille.csv", FileMode.Create);
+            StreamWriter w = new StreamWriter(fs, Encoding.UTF8);
+
+            w.WriteLine("tailleTexte;tempsReaction");
+            foreach(Tuple<int,double> tuple in taillesTemps)
+            {
+                w.WriteLine(tuple.Item1 + ";" + tuple.Item2);
+            }
+
+            w.Flush();
+            w.Close();
+            fs.Close();
         }
     }
 }
