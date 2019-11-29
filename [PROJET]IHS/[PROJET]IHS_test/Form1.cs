@@ -131,7 +131,7 @@ namespace _PROJET_IHS_test
             else // sinon on en affiche une ou pas aléatoirement // TODO attendre au moins x secondes avant de l'afficher
             {
                 ++attendreApresDerniereAlarme;
-                if (attendreApresDerniereAlarme >= 12)
+                if (attendreApresDerniereAlarme >= 10)
                 {
                     int randnumber = rand.Next(0, 10);
                     if (alarmeAffichee == -1 && randnumber >= 9 && !termine()) // on affiche une nouvelle alarme
@@ -207,10 +207,7 @@ namespace _PROJET_IHS_test
         private void Form1_Load(object sender, EventArgs e)
         {
             boutonTermine.Hide();
-
-            taillesTemps.Add(new Tuple<int, double> (1, 0.0));
-            taillesTemps.Add(new Tuple<int, double> (2, 0.0));
-            taillesTemps.Add(new Tuple<int, double> (3, 0.0));
+            
             taillesTemps.Add(new Tuple<int, double> (4, 0.0));
             taillesTemps.Add(new Tuple<int, double> (5, 0.0));
             taillesTemps.Add(new Tuple<int, double> (6, 0.0));
@@ -231,8 +228,6 @@ namespace _PROJET_IHS_test
             taillesTemps.Add(new Tuple<int, double> (21, 0.0));
             taillesTemps.Add(new Tuple<int, double> (22, 0.0));
             taillesTemps.Add(new Tuple<int, double> (23, 0.0));
-            taillesTemps.Add(new Tuple<int, double> (24, 0.0));
-            taillesTemps.Add(new Tuple<int, double> (25, 0.0));
         }
 
         private void button1_Click(object sender, EventArgs e)
