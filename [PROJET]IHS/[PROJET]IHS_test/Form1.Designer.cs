@@ -129,14 +129,15 @@
             // 
             // labelAlarme
             // 
-            this.labelAlarme.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labelAlarme.AutoSize = true;
             this.labelAlarme.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.labelAlarme.Dock = System.Windows.Forms.DockStyle.Right;
             this.labelAlarme.Font = new System.Drawing.Font("Arial", 20F, System.Drawing.FontStyle.Bold);
             this.labelAlarme.ForeColor = System.Drawing.Color.Black;
-            this.labelAlarme.Location = new System.Drawing.Point(798, 1);
+            this.labelAlarme.Location = new System.Drawing.Point(798, 0);
             this.labelAlarme.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelAlarme.Name = "labelAlarme";
+            this.labelAlarme.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.labelAlarme.Size = new System.Drawing.Size(129, 32);
             this.labelAlarme.TabIndex = 0;
             this.labelAlarme.Text = "ALARME";

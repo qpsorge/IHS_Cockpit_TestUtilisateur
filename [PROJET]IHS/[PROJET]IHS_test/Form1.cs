@@ -21,19 +21,21 @@ namespace _PROJET_IHS_test
         string[] operateurs = { "+", "-", "/" ,"x"};
         List<Tuple<int, double>> taillesTemps = new List<Tuple<int, double>>(); // taille de police, temps de réaction
         private static System.Timers.Timer chrono;
+        private static System.Timers.Timer timerAlarme;
         int alarmeAffichee = -1;
         double tempsAlarmeAffichee = 0.0;
+        int attendreApresDerniereAlarme = 0;
         TimeSpan debutAlarme;
-        int iChrono = 0;
 
         public delegate void Del(string nombre1, string nombre2, string operation, string resultats);
-        public delegate void Del2(int size);
+        public delegate void Del2();
         public delegate void Del3();
+        public delegate void Del4();
 
-        public Delegate UpdateAlarmeDelegate(int size)
+        public Delegate AfficherAlarmeDelegate()
         {
-            UpdateAlarme(size);
-            return new Del2(UpdateAlarme);
+            AfficherAlarme();
+            return new Del2(AfficherAlarme);
         }
 
         public Delegate UpdateTextDelegate(string nombre1, string nombre2, string operation, string resultats)
@@ -48,15 +50,23 @@ namespace _PROJET_IHS_test
             return new Del3(SupprimerAlarme);
         }
 
-        public void UpdateAlarme(int size)
+        public Delegate AfficherFinDelegate()
+        {
+            AfficherBoutonFin();
+            return new Del3(AfficherBoutonFin);
+        }
+
+        public void AfficherAlarme()
         {
             if (labelAlarme.InvokeRequired)
             {
-                labelAlarme.Invoke(new Del2(UpdateAlarme), size);
+                labelAlarme.Invoke(new Del2(AfficherAlarme));
             }
             else
             {
-                labelAlarme.Font = new Font("Arial", size, FontStyle.Bold);
+
+                ChoisirAlarmeAAfficherRandom();
+                labelAlarme.Font = new Font("Arial", taillesTemps[alarmeAffichee].Item1, FontStyle.Bold);
                 labelAlarme.ForeColor = Color.Red;
                 labelAlarme.Refresh();
                 debutAlarme = watch.Elapsed;
@@ -93,12 +103,23 @@ namespace _PROJET_IHS_test
                 labelAlarme.Refresh();
             }
         }
-
-        private void OnChronoTimedEvent(object source, ElapsedEventArgs e)
+        public void AfficherBoutonFin()
         {
-            ++iChrono;
+            if (boutonTermine.InvokeRequired)
+            {
+                // This is a worker thread so delegate the task.
+                boutonTermine.Invoke(new Del4(AfficherBoutonFin));
+            }
+            else
+            {
+                // This is the UI thread so perform the task.
+                boutonTermine.Show();
+            }
+        }
 
-            if (alarmeAffichee != -1)
+        private void OnTimerAlarmeTimedEvent(object source, ElapsedEventArgs e)
+        {
+            if (alarmeAffichee != -1) // s'il y a déjà une alarme affichée
             {
                 tempsAlarmeAffichee += 0.4;
                 if (tempsAlarmeAffichee >= 5)
@@ -107,39 +128,44 @@ namespace _PROJET_IHS_test
                     SupprimerAlarme();
                 }
             }
-            if (iChrono % 5 == 1) // modification opérations
+            else // sinon on en affiche une ou pas aléatoirement // TODO attendre au moins x secondes avant de l'afficher
             {
-                int choixOperateur = rand.Next(0, 3 + 1);
-                string operation = "" + operateurs[choixOperateur];
-                string nombre1 = "" + rand.Next(1, 21);
-                string nombre2 = "" + rand.Next(1, 21);
-                string resultat = "";
-                switch (choixOperateur)
+                ++attendreApresDerniereAlarme;
+                if (attendreApresDerniereAlarme >= 12)
                 {
-                    case 0:
-                        resultat = "" + (int.Parse(labelNombre1.Text) + int.Parse(labelNombre2.Text) + rand.Next(0, 4) - 2);
-                        break;
-                    case 1:
-                        resultat = "" + (int.Parse(labelNombre1.Text) - int.Parse(labelNombre2.Text) + rand.Next(0, 4) - 2);
-                        break;
-                    case 2:
-                        resultat = "" + (int.Parse(labelNombre1.Text) / int.Parse(labelNombre2.Text) + rand.Next(0, 4) - 2);
-                        break;
-                    case 3:
-                        resultat = "" + (int.Parse(labelNombre1.Text) * int.Parse(labelNombre2.Text) + rand.Next(0, 4) - 2);
-                        break;
-                }
-                UpdateTextDelegate(nombre1, nombre2, operation, resultat);
-            }
-            else
-            {
-                int randnumber = rand.Next(0, 50);
-                if (alarmeAffichee == -1 && randnumber >= 48)
-                {
-                    ChoisirAlarmeAAfficherRandom();
-                    UpdateAlarmeDelegate(taillesTemps[alarmeAffichee].Item1);
+                    int randnumber = rand.Next(0, 10);
+                    if (alarmeAffichee == -1 && randnumber >= 9 && !termine()) // on affiche une nouvelle alarme
+                    {
+                        attendreApresDerniereAlarme = 0;
+                        AfficherAlarmeDelegate();
+                    }
                 }
             }
+        }
+
+        private void OnChronoTimedEvent(object source, ElapsedEventArgs e)
+        {
+            int choixOperateur = rand.Next(0, 3 + 1);
+            string operation = "" + operateurs[choixOperateur];
+            string nombre1 = "" + rand.Next(1, 21);
+            string nombre2 = "" + rand.Next(1, 21);
+            string resultat = "";
+            switch (choixOperateur)
+            {
+                case 0:
+                    resultat = "" + (int.Parse(labelNombre1.Text) + int.Parse(labelNombre2.Text) + rand.Next(0, 4) - 2);
+                    break;
+                case 1:
+                    resultat = "" + (int.Parse(labelNombre1.Text) - int.Parse(labelNombre2.Text) + rand.Next(0, 4) - 2);
+                    break;
+                case 2:
+                    resultat = "" + (int.Parse(labelNombre1.Text) / int.Parse(labelNombre2.Text) + rand.Next(0, 4) - 2);
+                    break;
+                case 3:
+                    resultat = "" + (int.Parse(labelNombre1.Text) * int.Parse(labelNombre2.Text) + rand.Next(0, 4) - 2);
+                    break;
+            }
+            UpdateTextDelegate(nombre1, nombre2, operation, resultat);
         }
 
         public bool termine()
@@ -156,7 +182,7 @@ namespace _PROJET_IHS_test
             }
             if (termine)
             {
-                boutonTermine.Show();
+                AfficherFinDelegate();
                 chrono.Close();
             }
             return termine;
@@ -170,9 +196,7 @@ namespace _PROJET_IHS_test
         private void ChoisirAlarmeAAfficherRandom()
         {
             bool trouve = false;
-            if (termine())
-                return;
-            while (!trouve) // TODO vérifier qu'il reste des nouvelles alarmes à afficher
+            while (!trouve)
             {
                 alarmeAffichee = rand.Next(0, taillesTemps.Count);
                 if (taillesTemps[alarmeAffichee].Item2 == 0.0)
@@ -184,6 +208,11 @@ namespace _PROJET_IHS_test
         {
             boutonTermine.Hide();
 
+            taillesTemps.Add(new Tuple<int, double> (1, 0.0));
+            taillesTemps.Add(new Tuple<int, double> (2, 0.0));
+            taillesTemps.Add(new Tuple<int, double> (3, 0.0));
+            taillesTemps.Add(new Tuple<int, double> (4, 0.0));
+            taillesTemps.Add(new Tuple<int, double> (5, 0.0));
             taillesTemps.Add(new Tuple<int, double> (6, 0.0));
             taillesTemps.Add(new Tuple<int, double> (7, 0.0));
             taillesTemps.Add(new Tuple<int, double> (8, 0.0));
@@ -212,13 +241,19 @@ namespace _PROJET_IHS_test
 
             // Create a timer and set a two second interval.
             chrono = new System.Timers.Timer();
-            chrono.Interval = 400;
+            chrono.Interval = 2000;
             // Hook up the Elapsed event for the timer. 
             chrono.Elapsed += OnChronoTimedEvent;
             // Have the timer fire repeated events (true is the default)
             chrono.AutoReset = true;
             // Start the timer
             chrono.Enabled = true;
+
+            timerAlarme = new System.Timers.Timer();
+            timerAlarme.Interval = 400;
+            timerAlarme.Elapsed += OnTimerAlarmeTimedEvent;
+            timerAlarme.AutoReset = true;
+            timerAlarme.Enabled = true;
 
             watch.Start();
         }
