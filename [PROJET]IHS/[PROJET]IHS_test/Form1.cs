@@ -150,19 +150,32 @@ namespace _PROJET_IHS_test
             string nombre1 = "" + rand.Next(1, 21);
             string nombre2 = "" + rand.Next(1, 21);
             string resultat = "";
+            int faux = rand.Next(0, 2);
             switch (choixOperateur)
             {
                 case 0:
-                    resultat += (int.Parse(nombre1) + int.Parse(nombre2) + rand.Next(0, 4) - 2);
+                    if (faux == 0)
+                        resultat += (int.Parse(nombre1) + int.Parse(nombre2) + rand.Next(-2,2));
+                    else
+                        resultat += (int.Parse(nombre1) + int.Parse(nombre2));
                     break;
                 case 1:
-                    resultat += (int.Parse(nombre1) - int.Parse(nombre2) + rand.Next(0, 4) - 2);
+                    if (faux == 0)
+                        resultat += (int.Parse(nombre1) - int.Parse(nombre2) + rand.Next(-2, 2));
+                    else
+                        resultat += (int.Parse(nombre1) - int.Parse(nombre2));
                     break;
                 case 2:
-                    resultat += (int.Parse(nombre1) / int.Parse(nombre2) + rand.Next(0, 4) - 2);
+                    if (faux == 0)
+                        resultat += (int.Parse(nombre1) / int.Parse(nombre2) + rand.Next(-2, 2));
+                    else
+                        resultat += (int.Parse(nombre1) / int.Parse(nombre2));
                     break;
                 case 3:
-                    resultat += (int.Parse(nombre1) * int.Parse(nombre2) + rand.Next(0, 4) - 2);
+                    if (faux == 0)
+                        resultat += (int.Parse(nombre1) * int.Parse(nombre2) + rand.Next(-2, 2));
+                    else
+                        resultat += (int.Parse(nombre1) * int.Parse(nombre2));
                     break;
             }
             UpdateTextDelegate(nombre1, nombre2, operation, resultat);
