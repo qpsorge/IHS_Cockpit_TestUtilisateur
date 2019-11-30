@@ -153,16 +153,16 @@ namespace _PROJET_IHS_test
             switch (choixOperateur)
             {
                 case 0:
-                    resultat = "" + (int.Parse(labelNombre1.Text) + int.Parse(labelNombre2.Text) + rand.Next(0, 4) - 2);
+                    resultat += (int.Parse(nombre1) + int.Parse(nombre2) + rand.Next(0, 4) - 2);
                     break;
                 case 1:
-                    resultat = "" + (int.Parse(labelNombre1.Text) - int.Parse(labelNombre2.Text) + rand.Next(0, 4) - 2);
+                    resultat += (int.Parse(nombre1) - int.Parse(nombre2) + rand.Next(0, 4) - 2);
                     break;
                 case 2:
-                    resultat = "" + (int.Parse(labelNombre1.Text) / int.Parse(labelNombre2.Text) + rand.Next(0, 4) - 2);
+                    resultat += (int.Parse(nombre1) / int.Parse(nombre2) + rand.Next(0, 4) - 2);
                     break;
                 case 3:
-                    resultat = "" + (int.Parse(labelNombre1.Text) * int.Parse(labelNombre2.Text) + rand.Next(0, 4) - 2);
+                    resultat += (int.Parse(nombre1) * int.Parse(nombre2) + rand.Next(0, 4) - 2);
                     break;
             }
             UpdateTextDelegate(nombre1, nombre2, operation, resultat);
